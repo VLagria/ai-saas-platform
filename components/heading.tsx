@@ -24,7 +24,7 @@ export const Heading = ({
             </div>
             <div>
                 <h2 className="text-3xl font-bold">
-                    Conversation
+                    {title}
                 </h2>
                 <p className="text-sm text-muted-foreground">
                     {description}
