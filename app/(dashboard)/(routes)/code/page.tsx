@@ -20,10 +20,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ChatCompletionRequestMessage } from "openai";
 import { cn } from "@/lib/utils";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 import ReactMarkdown from "react-markdown";
 
 const CodePage = () => {
+    const proModal = useProModal();
     const router = useRouter(); 
 
     const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
@@ -54,8 +56,9 @@ const CodePage = () => {
             form.reset();
             
         } catch (error: any) {
-            //TODO: Open Pro Modal
-            console.log(error);
+            if (error?.response?.status === 403) {
+                proModal.onOpen();
+            }
         } finally {
             router.refresh();
         }
