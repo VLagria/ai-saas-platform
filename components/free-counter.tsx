@@ -9,11 +9,13 @@ import { Zap } from "lucide-react";
 import { useProModal } from "@/hooks/use-pro-modal";
 
 interface FreeCountProps {
-    apiLimitCount: number
+    apiLimitCount: number;
+    isPro: boolean;
 };
 
 const FreeCounter = ({
-    apiLimitCount = 0  // eslint-disable-line @typescript-eslint/no-unused-vars
+    apiLimitCount = 0,
+    isPro = false,
 }: FreeCountProps) => {
     const proModal = useProModal();
     const [mounted, setMounted] = useState(false);
@@ -23,6 +25,10 @@ const FreeCounter = ({
     }, []);
 
     if (!mounted) {
+        return null;
+    }
+
+    if (isPro) {
         return null;
     }
 
